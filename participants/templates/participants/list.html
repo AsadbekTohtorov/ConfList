@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список участников</title>
+</head>
+<body>
+    <h2>Список участников</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>№</th>
+                <th>Ф.И.О</th>
+                <th>Страна</th>
+                <th>Должность</th>
+                <th>Место работы</th>
+                <th>Научная степень</th>
+                <th>Название тезиса</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for participant in participants %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ participant.full_name }}</td>
+                <td>{{ participant.country }}</td>
+                <td>{{ participant.position }}</td>
+                <td>{{ participant.workplace }}</td>
+                <td>{{ participant.academic_degree|default:"-" }}</td>
+                <td>{{ participant.thesis_title }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7">Нет зарегистрированных участников</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'register_participant' %}">Зарегистрировать участника</a>
+</body>
+</html>
